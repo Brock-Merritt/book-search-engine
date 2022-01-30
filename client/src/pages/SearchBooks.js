@@ -22,6 +22,20 @@ const SearchBooks = () => {
   useEffect(() => {
     return () => saveBookIds(savedBookIds);
   });
+  const searchGoogleBooks = (query) => {
+  return fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
+  };  
+  // const searchGoogleBooks = (query) => {
+  //   return fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`).then(async response =>{
+  //     try{
+  //       const data = await response.json()
+  //       console.log('response data', data)
+  //     }catch(error) {
+  //       console.log('error happened ')
+  //       console.log(error)
+  //     }
+  //   });
+  // };
 
 
 
