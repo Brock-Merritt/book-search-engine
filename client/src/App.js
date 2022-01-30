@@ -7,6 +7,10 @@ import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks'; 
 
 const client = new ApolloClient({
+  // uri: "http://localhost:8000/graphql/",
+  // fetchOptions: {
+  //   credentials: "include"
+  // },
   request: (operation) => {
     const token = localStorage.getItem("id_token");
 
