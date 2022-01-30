@@ -16,11 +16,11 @@ const SavedBooks = () => {
   // // use this to determine if `useEffect()` hook needs to run again
   // const userDataLength = Object.keys(userData).length;
 
-  const [ removeBook ] = useMutation(REMOVE_BOOK);
+ 
 
   const userData= response?.me || {};
 
- 
+  const [ removeBook, {error} ] = useMutation(REMOVE_BOOK);
   
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
@@ -36,12 +36,6 @@ const SavedBooks = () => {
         variables: {bookId},
       });
   
-
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
-
-     
 
       // upon success, remove book's id from localStorage
       removeBookId(bookId);
