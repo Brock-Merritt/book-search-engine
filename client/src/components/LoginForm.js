@@ -2,12 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useMutation } from "@apollo/react-hooks"
-import { loginUser } from '../utils/API';
+// import { loginUser } from '../utils/API';
 import Auth from '../utils/auth';
 import { LOGIN_USER } from '../utils/mutation';
 
 const LoginForm = () => {
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
+  
   const [validated] = useState(false);
 
   const [login, {error}] = useMutation(LOGIN_USER);
@@ -39,18 +40,20 @@ const LoginForm = () => {
     }
 
     try {
-      const response = await login(userFormData);
+      const { response } = await login({
+        variables: { ...userFormData },
+      });
 
 
 
       Auth.login(response.login.token);
     } catch (err) {
       console.error(err);
-      setShowAlert(true);
+      
     }
 
     setUserFormData({
-      username: '',
+      username: 'hi',
       email: '',
       password: '',
     });
