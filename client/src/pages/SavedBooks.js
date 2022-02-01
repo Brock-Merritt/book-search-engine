@@ -10,7 +10,7 @@ import { REMOVE_BOOK } from '../utils/mutation';
 
 const SavedBooks = () => {
   
-  const { loading, response } = useQuery(GET_ME);
+  const { loading, data } = useQuery(GET_ME);
   // const userData = response;
 
   // // use this to determine if `useEffect()` hook needs to run again
@@ -18,7 +18,7 @@ const SavedBooks = () => {
 
  
 
-  const userData = response?.me || {};
+  const userData = data?.me || {};
 
   const [ removeBook, {error} ] = useMutation(REMOVE_BOOK);
   
@@ -32,7 +32,7 @@ const SavedBooks = () => {
     }
 
     try {
-      const {response} = await removeBook({
+      const { data } = await removeBook({
         variables: {bookId},
       });
   

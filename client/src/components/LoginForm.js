@@ -16,13 +16,13 @@ const LoginForm = () => {
   const [showAlert, setShowAlert] = useState(false);
 
 
-  useEffect(() => {
-    if (error) {
-      setShowAlert(true);
-    } else {
-      setShowAlert(false);
-    }
-  }, [error]);
+  // useEffect(() => {
+  //   if (error) {
+  //     setShowAlert(true);
+  //   } else {
+  //     setShowAlert(false);
+  //   }
+  // }, [error]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -40,18 +40,18 @@ const LoginForm = () => {
     }
 
     try {
-      const { response } = await login({
+      const { data } = await login({
         variables: { ...userFormData },
       });
 
-      Auth.login(response.login.token);
+      Auth.login(data.login.token);
     } catch (err) {
       console.error(err);
       
     }
 
     setUserFormData({
-      username: 'hi',
+      username: '',
       email: '',
       password: '',
     });
