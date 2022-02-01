@@ -17,9 +17,17 @@ const server = new ApolloServer({
 });
 await server.start();
   server.applyMiddleware({ app });
-  console.log(`Use GraphQL at http://localhost:${PORT}${server.graphql}`);
+  // console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
 };
-
+// Error handler
+const errorHandler = (err, req, res, next) => {
+  if (res.headersSent) {
+    return next(err);
+  }
+  const { status } = err;
+  res.status(status).json(err);
+};
+app.use(errorHandler);
 startServer()
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

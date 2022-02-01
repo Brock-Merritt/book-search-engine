@@ -26,8 +26,8 @@ const resolvers = {
   },
 
   Mutation: {
-    addUser: async (parent, args) => {
-      const user = await User.create(args);
+    addUser: async (parent, {username, email, password }) => {
+      const user = await User.create({username, email, password });
       const token = signToken(user);
 
       return { token, user };
@@ -48,43 +48,31 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    addThought: async (parent, args, context) => {
+    saveBook: async (parent, args, context) => {
       if (context.user) {
-        const thought = await Thought.create({ ...args, username: context.user.username });
+        
 
-        await User.findByIdAndUpdate(
+        const updatedUser= await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $push: { thoughts: thought._id } },
+          { $addToSet:{savedBooks: args.input } },
           { new: true }
         );
 
-        return thought;
+        return updatedUser;
       }
 
       throw new AuthenticationError('You need to be logged in!');
     },
-    addReaction: async (parent, { thoughtId, reactionBody }, context) => {
+ 
+    removeBook: async (parent, { friendId }, context) => {
       if (context.user) {
-        const updatedThought = await Thought.findOneAndUpdate(
-          { _id: thoughtId },
-          { $push: { reactions: { reactionBody, username: context.user.username } } },
-          { new: true, runValidators: true }
-        );
-
-        return updatedThought;
-      }
-
-      throw new AuthenticationError('You need to be logged in!');
-    },
-    addFriend: async (parent, { friendId }, context) => {
-      if (context.user) {
-        const updatedUser = await User.findOneAndUpdate(
+        const removeBook = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { friends: friendId } },
+          { $addToSet: { savedBooks: {bookId} } },
           { new: true }
         ).populate('friends');
 
-        return updatedUser;
+        return removeBook;
       }
 
       throw new AuthenticationError('You need to be logged in!');
