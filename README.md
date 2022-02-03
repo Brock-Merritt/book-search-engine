@@ -29,7 +29,7 @@ An easy-to-use book search engine, that will have many entries for any title inp
 None needed
     
 ## Usage 
-Used to research, track, and bookmark books as you see fit
+First, get registered with the Sign-up page, then the functions to research, track, and bookmark books as you see fit, become available
 
 ## Contributors 
 Brock Merritt
