@@ -23,20 +23,19 @@
 
 
 ## Description 
-A personal portfolio for Brock Merritt, complete with An About section, a Contact section, and a Project section.
+An easy-to-use book search engine, that will have many entries for any title inputted. Save books to your personal list, and remove them easily once you are done reading them
 
 ## Installation 
-none
+None needed
     
 ## Usage 
-Used to evalute my journey as a developer
-
+Used to research, track, and bookmark books as you see fit
 
 ## Contributors 
 Brock Merritt
 
 ## Input Commands 
-none
+Search for whatever book title you want
 
 ## License
 MIT
